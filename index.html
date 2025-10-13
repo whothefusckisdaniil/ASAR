@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASAR - это современное культурное пространство</title>
+    <link rel="icon" type="image/png" href="images/telegram-cloud-photo-size-2-5433995101551591903-y-removebg-preview-2.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f7f5;
+            color: #2d2d2d;
+        }
+        .ornament-divider {
+            height: 20px;
+            background-image: url('data:image/svg+xml;utf8,<svg width="100" height="20" viewBox="0 0 100 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 10 L40 10 L50 4 L60 10 L100 10" stroke="%23c5a36d" stroke-width="2.5"/></svg>');
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .page-section {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .page-section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .loader {
+            border: 4px solid #e0e0e0;
+            border-top: 4px solid #c5a36d;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .post-card-link {
+            cursor: pointer;
+        }
+        .post-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .post-content h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .line-clamp-2 {
+           overflow: hidden;
+           display: -webkit-box;
+           -webkit-box-orient: vertical;
+           -webkit-line-clamp: 2;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="bg-white/90 backdrop-blur-lg sticky top-0 z-40 border-b border-gray-200/80">
+        <div class="container mx-auto px-5 py-3">
+            <nav class="flex justify-between items-center">
+                <a href="#" class="nav-link" data-page="home-page">
+                    <img src="images/telegram-cloud-photo-size-2-5433995101551591903-y-removebg-preview.png" alt="ASAR Logo" class="h-10 w-10 rounded-full object-cover">
+                </a>
+                <div class="hidden lg:flex items-center space-x-8 text-sm font-medium text-gray-700">
+                    <a href="#" class="hover:text-[#c5a36d] transition-colors nav-link" data-page="home-page">Главная</a>
+                    <a href="#" class="hover:text-[#c5a36d] transition-colors nav-link" data-category="Одежда">Одежда</a>
+                    <a href="#" class="hover:text-[#c5a36d] transition-colors nav-link" data-category="Книги">Книги</a>
+                    <a href="#" class="hover:text-[#c5a36d] transition-colors nav-link" data-category="Музыка">Музыка</a>
+                    <a href="#" class="hover:text-[#c5a36d] transition-colors nav-link" data-category="Фильмы">Фильмы</a>
+                    <a href="#" class="hover:text-[#c5a36d] transition-colors nav-link" data-category="Украшения">Украшения</a>
+                    <a href="#" class="hover:text-[#c5a36d] transition-colors nav-link" data-page="about-page">О нас</a>
+                </div>
+                <button id="mobile-menu-btn" class="lg:hidden text-gray-600">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </nav>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-200/80">
+            <div class="flex flex-col space-y-3 p-5">
+                <a href="#" class="hover:text-[#c5a36d] transition-colors nav-link" data-page="home-page">Главная</a>
+                <a href="#" class="hover:text-[#c5a36d] transition-colors nav-link" data-category="Одежда">Одежда</a>
+                <a href="#" class="hover:text-[#c5a36d] transition-colors nav-link" data-category="Книги">Книги</a>
+                <a href="#" class="hover:text-[#c5a36d] transition-colors nav-link" data-category="Музыка">Музыка</a>
+                <a href="#" class="hover:text-[#c5a36d] transition-colors nav-link" data-category="Фильмы">Фильмы</a>
+                <a href="#" class="hover:text-[#c5a36d] transition-colors nav-link" data-category="Украшения">Украшения</a>
+                <a href="#" class="hover:text-[#c5a36d] transition-colors nav-link" data-page="about-page">О нас</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-5 py-10 md:py-16">
+        <!-- Home Page -->
+        <section id="home-page" class="page-section active">
+            <h1 class="text-center text-3xl md:text-4xl font-light mb-4">Последние публикации</h1>
+            <div class="ornament-divider mb-12"></div>
+            <div id="posts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Posts will be injected here by JavaScript -->
+                <div id="loader-container" class="col-span-full flex justify-center items-center h-64">
+                    <div class="loader"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category Page -->
+        <section id="category-page" class="page-section">
+            <h1 id="category-title" class="text-center text-3xl md:text-4xl font-light mb-4"></h1>
+            <div class="ornament-divider mb-12"></div>
+            <div id="category-posts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            </div>
+        </section>
+
+        <!-- Post Detail Page -->
+        <section id="post-detail-page" class="page-section">
+            <div class="max-w-4xl mx-auto">
+                <button id="back-to-grid-btn" class="mb-8 text-sm font-medium text-gray-600 hover:text-[#c5a36d] transition-colors">← Назад к публикациям</button>
+                <img id="post-detail-image" src="" alt="" class="w-full h-auto max-h-[500px] object-cover rounded-xl shadow-lg mb-8">
+                <h1 id="post-detail-title" class="text-3xl md:text-4xl font-bold mb-4"></h1>
+                <div id="post-detail-content" class="post-content text-gray-700"></div>
+            </div>
+        </section>
+
+        <!-- About Page -->
+        <section id="about-page" class="page-section">
+             <h1 class="text-center text-3xl md:text-4xl font-light mb-4">О проекте ASAR</h1>
+            <div class="ornament-divider mb-12"></div>
+            <div class="max-w-3xl mx-auto space-y-5 text-gray-700 leading-relaxed text-center">
+                <p>Привет! Мы — команда ASAR, творческий проект, объединяющий людей, которые любят кино, музыку, книги и искусство. Наш сайт создан для тех, кто хочет находить вдохновение, узнавать о новых историях и делиться своими впечатлениями. Название ASAR выбрано не случайно — в переводе с казахского это слово означает «творить», «созидать».</p>
+                <p>Мы верим, что каждый человек способен создавать что-то особенное — будь то рисунок, текст, музыка или просто доброе слово. Мы не делаем сухие обзоры — мы делимся чувствами. Здесь вы найдёте подборки фильмов, музыки и книг, которые оставляют след, заставляют задуматься и чувствовать. Наши материалы — это сочетание личного взгляда, эстетики и искренности. ASAR — это не просто сайт. Это место, где встречаются вдохновение, атмосфера и живое общение о том, что по-настоящему трогает.</p>
+            </div>
+        </section>
+
+        <!-- Admin Page -->
+        <section id="admin-page" class="page-section">
+            <h1 class="text-center text-3xl md:text-4xl font-light mb-4">Панель администратора</h1>
+            <div class="ornament-divider mb-12"></div>
+            <div class="max-w-2xl mx-auto">
+                <!-- Form to add a new post -->
+                <div class="bg-white p-8 rounded-xl shadow-sm border mb-12">
+                     <h2 class="text-xl font-semibold mb-6">Добавить новую публикацию</h2>
+                     <form id="add-post-form" class="space-y-4">
+                        <input id="post-title" type="text" placeholder="Заголовок" required class="w-full p-3 border rounded-md focus:ring-2 focus:ring-[#c5a36d] focus:outline-none transition">
+                        <textarea id="post-subtitle" placeholder="Подзаголовок (краткое описание для карточки)" required rows="3" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-[#c5a36d] focus:outline-none transition"></textarea>
+                        <textarea id="post-content" placeholder="Полный текст публикации (используйте ## для подзаголовков)" required rows="10" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-[#c5a36d] focus:outline-none transition"></textarea>
+                        <input id="post-image-url" type="url" placeholder="URL изображения (https://...)" required class="w-full p-3 border rounded-md focus:ring-2 focus:ring-[#c5a36d] focus:outline-none transition">
+                        <select id="post-category" required class="w-full p-3 border rounded-md focus:ring-2 focus:ring-[#c5a36d] focus:outline-none transition bg-white">
+                            <option value="Одежда">Одежда</option>
+                            <option value="Книги">Книги</option>
+                            <option value="Музыка">Музыка</option>
+                            <option value="Фильмы">Фильмы</option>
+                            <option value="Украшения">Украшения</option>
+                        </select>
+                        <button type="submit" class="w-full bg-[#c5a36d] text-white py-3 rounded-md font-semibold hover:bg-opacity-90 transition-all duration-300">Опубликовать</button>
+                     </form>
+                </div>
+                <!-- List of existing posts -->
+                <div>
+                    <h2 class="text-xl font-semibold mb-6">Все публикации</h2>
+                    <div id="admin-posts-container" class="space-y-3">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t mt-16">
+        <div class="container mx-auto px-5 py-8">
+            <div class="text-center text-gray-600">
+                <div class="flex justify-center space-x-6 mb-4">
+                    <a href="https://www.instagram.com/asar.community?igsh=MWJvbnRqdWs2MWFnNg==" target="_blank" rel="noopener noreferrer" class="hover:opacity-80 transition-opacity">
+                        <img src="https://www.svgrepo.com/show/365495/instagram-logo-thin.svg" alt="Instagram" class="w-6 h-6">
+                    </a>
+                    <a href="https://www.tiktok.com/@asar_community?_t=ZM-90WR7LebIWu&_r=1" target="_blank" rel="noopener noreferrer" class="hover:text-[#c5a36d] transition-colors">
+                        <img src="https://www.svgrepo.com/show/365821/tiktok-logo-thin.svg" alt="TikTok" class="w-6 h-6">
+                    </a>
+                </div>
+                <p class="text-sm">&copy; 2025 ASAR. Никае права пока не защищены.</p>
+                <button id="admin-login-btn" class="text-xs text-gray-400 hover:text-gray-600 mt-2">admin panel</button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Admin Login Modal -->
+    <div id="login-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center hidden z-50 p-5">
+        <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-sm relative">
+             <button id="close-login-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl">&times;</button>
+             <h2 class="text-2xl font-bold mb-6 text-center">Вход для администратора</h2>
+             <form id="login-form" class="space-y-4">
+                 <input id="username" type="text" placeholder="Логин" required class="w-full p-3 border rounded-md focus:ring-2 focus:ring-[#c5a36d] focus:outline-none transition">
+                 <input id="password" type="password" placeholder="Пароль" required class="w-full p-3 border rounded-md focus:ring-2 focus:ring-[#c5a36d] focus:outline-none transition">
+                 <p id="login-error" class="text-red-500 text-sm hidden">Неверный логин или пароль.</p>
+                 <button type="submit" class="w-full bg-[#2d2d2d] text-white py-3 rounded-md font-semibold hover:bg-black transition">Войти</button>
+             </form>
+        </div>
+    </div>
+    
+    <!-- Edit Post Modal -->
+    <div id="edit-post-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center hidden z-50 p-5">
+        <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-2xl relative flex flex-col" style="max-height: 90vh;">
+             <div class="flex-shrink-0">
+                <button id="close-edit-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl">&times;</button>
+                <h2 class="text-xl font-semibold mb-6">Редактировать публикацию</h2>
+             </div>
+             <form id="edit-post-form" class="space-y-4 overflow-y-auto pr-4 flex-grow">
+                <input type="hidden" id="edit-post-key">
+                <input id="edit-post-title" type="text" placeholder="Заголовок" required class="w-full p-3 border rounded-md focus:ring-2 focus:ring-[#c5a36d] focus:outline-none transition">
+                <textarea id="edit-post-subtitle" placeholder="Подзаголовок (краткое описание для карточки)" required rows="3" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-[#c5a36d] focus:outline-none transition"></textarea>
+                <textarea id="edit-post-content" placeholder="Полный текст публикации (используйте ## для подзаголовков)" required rows="10" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-[#c5a36d] focus:outline-none transition"></textarea>
+                <input id="edit-post-image-url" type="url" placeholder="URL изображения (https://...)" required class="w-full p-3 border rounded-md focus:ring-2 focus:ring-[#c5a36d] focus:outline-none transition">
+                <select id="edit-post-category" required class="w-full p-3 border rounded-md focus:ring-2 focus:ring-[#c5a36d] focus:outline-none transition bg-white">
+                    <option value="Одежда">Одежда</option>
+                    <option value="Книги">Книги</option>
+                    <option value="Музыка">Музыка</option>
+                    <option value="Фильмы">Фильмы</option>
+                    <option value="Украшения">Украшения</option>
+                </select>
+                <button type="submit" class="w-full bg-[#c5a36d] text-white py-3 rounded-md font-semibold hover:bg-opacity-90 transition-all duration-300">Сохранить изменения</button>
+             </form>
+        </div>
+    </div>
+
+    <script type="module">
+        // --- Firebase Configuration ---
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+        import { getDatabase, ref, push, set, onValue, remove, update } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyBN2xA8R-IybPQdCANpL9UZtCh0raYddkU",
+          authDomain: "asar-18b40.firebaseapp.com",
+          databaseURL: "https://asar-18b40-default-rtdb.europe-west1.firebasedatabase.app",
+          projectId: "asar-18b40",
+          storageBucket: "asar-18b40.firebasestorage.app",
+          messagingSenderId: "112388112999",
+          appId: "1:112388112999:web:9231af0fde5ca999444ac2"
+        };
+        
+        // --- App Initialization ---
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const postsRef = ref(db, 'posts');
+
+        // --- State ---
+        let allPostsCache = {};
+        let isAdminLoggedIn = false;
+        let lastActiveListPage = 'home-page';
+
+        // --- DOM Elements ---
+        const pageSections = document.querySelectorAll('.page-section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const postsGrid = document.getElementById('posts-grid');
+        const categoryPostsGrid = document.getElementById('category-posts-grid');
+        const categoryTitle = document.getElementById('category-title');
+        const adminPostsContainer = document.getElementById('admin-posts-container');
+        const addPostForm = document.getElementById('add-post-form');
+        const loginModal = document.getElementById('login-modal');
+        const editPostModal = document.getElementById('edit-post-modal');
+        const adminLoginBtn = document.getElementById('admin-login-btn');
+        const closeLoginModalBtn = document.getElementById('close-login-modal-btn');
+        const closeEditModalBtn = document.getElementById('close-edit-modal-btn');
+        const loginForm = document.getElementById('login-form');
+        const editPostForm = document.getElementById('edit-post-form');
+        const loginErrorMsg = document.getElementById('login-error');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const backToGridBtn = document.getElementById('back-to-grid-btn');
+        const postDetailImage = document.getElementById('post-detail-image');
+        const postDetailTitle = document.getElementById('post-detail-title');
+        const postDetailContent = document.getElementById('post-detail-content');
+
+        // --- Functions ---
+        const showPage = (targetPageId) => {
+            pageSections.forEach(section => {
+                section.classList.toggle('active', section.id === targetPageId);
+            });
+            if (targetPageId === 'home-page' || targetPageId === 'category-page') {
+                lastActiveListPage = targetPageId;
+            }
+            window.scrollTo(0, 0);
+            mobileMenu.classList.add('hidden');
+        };
+        
+        const createPostCardHTML = (post, key) => `
+            <div class="post-card-link group bg-white rounded-xl shadow-sm border overflow-hidden transform hover:shadow-lg hover:-translate-y-1 transition-all duration-300" data-post-key="${key}">
+                <div class="h-56 overflow-hidden">
+                    <img src="${post.imageUrl}" alt="${post.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null;this.src='https://placehold.co/600x400/f8f7f5/c5a36d?text=ASAR';">
+                </div>
+                <div class="p-6">
+                    <p class="text-xs font-semibold text-[#c5a36d] uppercase tracking-wider">${post.category}</p>
+                    <h3 class="text-xl font-semibold mt-2 mb-2 truncate">${post.title}</h3>
+                    <p class="text-gray-600 text-sm line-clamp-2">${post.subtitle}</p>
+                </div>
+            </div>
+        `;
+
+        const createAdminPostHTML = (post, key) => `
+            <div class="bg-white p-3 rounded-md border flex justify-between items-center text-sm">
+                <div>
+                    <p class="font-semibold">${post.title}</p>
+                    <p class="text-gray-500">${post.category}</p>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button data-key="${key}" class="edit-post-btn text-blue-500 hover:text-blue-700 font-semibold px-3 py-1">Редактировать</button>
+                    <button data-key="${key}" class="delete-post-btn text-red-500 hover:text-red-700 font-semibold px-3 py-1">Удалить</button>
+                </div>
+            </div>
+        `;
+
+        const renderContent = (posts) => {
+            allPostsCache = posts || {};
+            const loader = document.getElementById('loader-container');
+            if(loader) loader.remove();
+            const postsArray = Object.entries(allPostsCache).sort((a, b) => b[1].timestamp - a[1].timestamp);
+            postsGrid.innerHTML = postsArray.length > 0
+                ? postsArray.map(([key, post]) => createPostCardHTML(post, key)).join('')
+                : `<p class="col-span-full text-center text-gray-500">Публикаций пока нет.</p>`;
+            adminPostsContainer.innerHTML = postsArray.length > 0
+                ? postsArray.map(([key, post]) => createAdminPostHTML(post, key)).join('')
+                : `<p class="text-center text-gray-500">Публикаций пока нет.</p>`;
+        };
+
+        const showPostDetail = (postKey) => {
+            const post = allPostsCache[postKey];
+            if (!post) return;
+            postDetailImage.src = post.imageUrl;
+            postDetailImage.alt = post.title;
+            postDetailTitle.textContent = post.title;
+            postDetailContent.innerHTML = post.content
+                .split('\n')
+                .filter(line => line.trim() !== '')
+                .map(line => {
+                    if (line.trim().startsWith('## ')) {
+                        return `<h2>${line.trim().substring(3)}</h2>`;
+                    }
+                    return `<p>${line}</p>`;
+                }).join('');
+            showPage('post-detail-page');
+        };
+
+        const openEditModal = (postKey) => {
+            const post = allPostsCache[postKey];
+            if (!post) return;
+            document.getElementById('edit-post-key').value = postKey;
+            document.getElementById('edit-post-title').value = post.title;
+            document.getElementById('edit-post-subtitle').value = post.subtitle;
+            document.getElementById('edit-post-content').value = post.content;
+            document.getElementById('edit-post-image-url').value = post.imageUrl;
+            document.getElementById('edit-post-category').value = post.category;
+            editPostModal.classList.remove('hidden');
+        };
+
+        // --- Event Listeners ---
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const { page, category } = e.currentTarget.dataset;
+                if (page) {
+                    showPage(page);
+                } else if (category) {
+                    categoryTitle.textContent = category;
+                    const postsArray = Object.entries(allPostsCache).sort((a, b) => b[1].timestamp - a[1].timestamp);
+                    const filtered = postsArray.filter(([key, post]) => post.category === category);
+                    categoryPostsGrid.innerHTML = filtered.length > 0
+                        ? filtered.map(([key, post]) => createPostCardHTML(post, key)).join('')
+                        : `<p class="col-span-full text-center text-gray-500">В этой категории пока ничего нет.</p>`;
+                    showPage('category-page');
+                }
+            });
+        });
+        
+        mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        adminLoginBtn.addEventListener('click', () => loginModal.classList.remove('hidden'));
+        closeLoginModalBtn.addEventListener('click', () => loginModal.classList.add('hidden'));
+        closeEditModalBtn.addEventListener('click', () => editPostModal.classList.add('hidden'));
+        loginModal.addEventListener('click', (e) => {
+            if (e.target === loginModal) loginModal.classList.add('hidden');
+        });
+        editPostModal.addEventListener('click', (e) => {
+            if (e.target === editPostModal) editPostModal.classList.add('hidden');
+        });
+
+        backToGridBtn.addEventListener('click', () => showPage(lastActiveListPage));
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (username.value === 'admin' && password.value === '1234') {
+                isAdminLoggedIn = true;
+                loginModal.classList.add('hidden');
+                loginForm.reset();
+                loginErrorMsg.classList.add('hidden');
+                showPage('admin-page');
+            } else {
+                loginErrorMsg.classList.remove('hidden');
+            }
+        });
+
+        addPostForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (!isAdminLoggedIn) return alert('Доступ запрещен.');
+            
+            const newPost = {
+                title: document.getElementById('post-title').value,
+                subtitle: document.getElementById('post-subtitle').value,
+                content: document.getElementById('post-content').value,
+                imageUrl: document.getElementById('post-image-url').value,
+                category: document.getElementById('post-category').value,
+                timestamp: Date.now()
+            };
+            
+            set(push(postsRef), newPost)
+                .then(() => addPostForm.reset())
+                .catch(err => console.error("Ошибка при добавлении поста:", err));
+        });
+
+        editPostForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (!isAdminLoggedIn) return alert('Доступ запрещен.');
+            
+            const postKey = document.getElementById('edit-post-key').value;
+            const postToUpdateRef = ref(db, `posts/${postKey}`);
+
+            const updatedPostData = {
+                title: document.getElementById('edit-post-title').value,
+                subtitle: document.getElementById('edit-post-subtitle').value,
+                content: document.getElementById('edit-post-content').value,
+                imageUrl: document.getElementById('edit-post-image-url').value,
+                category: document.getElementById('edit-post-category').value,
+                timestamp: allPostsCache[postKey].timestamp 
+            };
+            
+            update(postToUpdateRef, updatedPostData)
+                .then(() => editPostModal.classList.add('hidden'))
+                .catch(err => console.error("Ошибка при обновлении поста:", err));
+        });
+
+        adminPostsContainer.addEventListener('click', (e) => {
+            const target = e.target;
+            if (target.matches('.delete-post-btn')) {
+                if (!isAdminLoggedIn) return;
+                const key = target.dataset.key;
+                if (confirm('Вы уверены, что хотите удалить этот пост навсегда?')) {
+                    remove(ref(db, `posts/${key}`))
+                        .catch(err => console.error("Ошибка при удалении поста:", err));
+                }
+            } else if (target.matches('.edit-post-btn')) {
+                if (!isAdminLoggedIn) return;
+                const key = target.dataset.key;
+                openEditModal(key);
+            }
+        });
+
+        // Event delegation for clicking on post cards
+        document.addEventListener('click', (e) => {
+            const card = e.target.closest('.post-card-link');
+            if (card) {
+                const postKey = card.dataset.postKey;
+                showPostDetail(postKey);
+            }
+        });
+        
+        // --- Firebase Data Listener ---
+        onValue(postsRef, (snapshot) => {
+            renderContent(snapshot.val());
+        }, { onlyOnce: false });
+
+    </script>
+</body>
+</html>
+
