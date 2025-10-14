@@ -325,12 +325,20 @@
             allPostsCache = posts || {};
             const loader = document.getElementById('loader-container');
             if(loader) loader.remove();
-            const postsArray = Object.entries(allPostsCache).sort((a, b) => b[1].timestamp - a[1].timestamp);
-            postsGrid.innerHTML = postsArray.length > 0
-                ? postsArray.map(([key, post]) => createPostCardHTML(post, key)).join('')
+            
+            // sort all posts by timestamp
+            const allPostsSorted = Object.entries(allPostsCache).sort((a, b) => b[1].timestamp - a[1].timestamp);
+
+            // latest 6 posts
+            const latestSixPosts = allPostsSorted.slice(0, 6);
+            
+            // home page
+            postsGrid.innerHTML = latestSixPosts.length > 0
+                ? latestSixPosts.map(([key, post]) => createPostCardHTML(post, key)).join('')
                 : `<p class="col-span-full text-center text-gray-500">Публикаций пока нет.</p>`;
-            adminPostsContainer.innerHTML = postsArray.length > 0
-                ? postsArray.map(([key, post]) => createAdminPostHTML(post, key)).join('')
+            // admin page
+            adminPostsContainer.innerHTML = allPostsSorted.length > 0
+                ? allPostsSorted.map(([key, post]) => createAdminPostHTML(post, key)).join('')
                 : `<p class="text-center text-gray-500">Публикаций пока нет.</p>`;
         };
 
