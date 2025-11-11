@@ -11,62 +11,575 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --kazakh-gold: #D4AF37;
+            --kazakh-gold-light: #E8C870;
+            --kazakh-blue: #1E7B8F;
+            --kazakh-blue-light: #2B9EB3;
+            --kazakh-turquoise: #40E0D0;
+            --kazakh-beige: #F5F1E8;
+            --kazakh-white: #FDFBF7;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8f7f5;
+            background: var(--kazakh-beige);
             color: #2d2d2d;
+            position: relative;
+            overflow-x: hidden;
         }
+
+        /* Живой анимированный фон с казахскими мотивами */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(30, 123, 143, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(64, 224, 208, 0.05) 0%, transparent 50%);
+            animation: backgroundMove 20s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        /* Казахские орнаменты на фоне */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 100px, rgba(212, 175, 55, 0.02) 100px, rgba(212, 175, 55, 0.02) 200px),
+                repeating-linear-gradient(-45deg, transparent, transparent 100px, rgba(30, 123, 143, 0.02) 100px, rgba(30, 123, 143, 0.02) 200px);
+            animation: ornamentMove 30s linear infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes backgroundMove {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(-5%, -5%) rotate(1deg); }
+            50% { transform: translate(-10%, -10%) rotate(0deg); }
+            75% { transform: translate(-5%, -5%) rotate(-1deg); }
+        }
+
+        @keyframes ornamentMove {
+            0% { background-position: 0 0, 0 0; }
+            100% { background-position: 200px 200px, -200px -200px; }
+        }
+
+        /* Плавающие казахские узоры */
+        .floating-pattern {
+            position: fixed;
+            width: 150px;
+            height: 150px;
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1;
+            background: radial-gradient(circle, var(--kazakh-gold) 2px, transparent 2px);
+            background-size: 20px 20px;
+            animation: float 25s ease-in-out infinite;
+        }
+
+        .floating-pattern:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-pattern:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            animation-delay: 5s;
+            animation-duration: 30s;
+        }
+
+        .floating-pattern:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 10s;
+            animation-duration: 35s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(30px, -30px) rotate(5deg); }
+            50% { transform: translate(0, -60px) rotate(0deg); }
+            75% { transform: translate(-30px, -30px) rotate(-5deg); }
+        }
+
+        * {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Казахский орнамент разделитель */
         .ornament-divider {
-            height: 20px;
-            background-image: url('data:image/svg+xml;utf8,<svg width="100" height="20" viewBox="0 0 100 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 10 L40 10 L50 4 L60 10 L100 10" stroke="%23c5a36d" stroke-width="2.5"/></svg>');
+            height: 40px;
+            background-image: url('data:image/svg+xml;utf8,<svg width="200" height="40" viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 20 L30 20 L40 12 L50 20 L60 12 L70 20 L100 20 M100 20 L130 20 L140 12 L150 20 L160 12 L170 20 L200 20" stroke="%23D4AF37" stroke-width="2.5"/><circle cx="40" cy="12" r="3" fill="%23D4AF37"/><circle cx="60" cy="12" r="3" fill="%232B9EB3"/><circle cx="140" cy="12" r="3" fill="%23D4AF37"/><circle cx="160" cy="12" r="3" fill="%232B9EB3"/><path d="M100 8 L105 20 L95 20 Z" fill="%23D4AF37"/></svg>');
             background-repeat: no-repeat;
             background-position: center;
+            animation: ornamentGlow 3s ease-in-out infinite;
         }
+
+        @keyframes ornamentGlow {
+            0%, 100% { opacity: 1; filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.3)); }
+            50% { opacity: 0.85; filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.5)); }
+        }
+
+        /* Анимации страниц */
         .page-section {
             display: none;
-            animation: fadeIn 0.5s ease-in-out;
+            animation: pageSlideIn 0.6s cubic-bezier(0.22, 1, 0.36, 1);
         }
+
         .page-section.active {
             display: block;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+
+        @keyframes pageSlideIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px) scale(0.98);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1);
+            }
         }
+
+        /* Хедер с казахскими мотивами */
+        header {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(253, 251, 247, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid transparent;
+            border-image: linear-gradient(90deg, transparent, var(--kazakh-gold), transparent) 1;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.08);
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                var(--kazakh-gold) 20%, 
+                var(--kazakh-blue) 50%, 
+                var(--kazakh-gold) 80%, 
+                transparent);
+            animation: borderFlow 4s linear infinite;
+        }
+
+        @keyframes borderFlow {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Навигация */
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--kazakh-gold), var(--kazakh-blue));
+            transform: translateX(-50%);
+            transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            color: var(--kazakh-gold);
+            transform: translateY(-2px);
+        }
+
+        /* Лоадер с казахским узором */
         .loader {
-            border: 4px solid #e0e0e0;
-            border-top: 4px solid #c5a36d;
+            border: 4px solid rgba(212, 175, 55, 0.2);
+            border-top: 4px solid var(--kazakh-gold);
+            border-right: 4px solid var(--kazakh-blue);
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
+            width: 60px;
+            height: 60px;
+            animation: loaderSpin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
         }
-        @keyframes spin {
+
+        @keyframes loaderSpin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        /* Карточки постов с казахскими элементами */
         .post-card-link {
             cursor: pointer;
+            background: linear-gradient(135deg, #ffffff 0%, var(--kazakh-white) 100%);
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+            overflow: hidden;
         }
+
+        .post-card-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--kazakh-gold), var(--kazakh-blue), var(--kazakh-turquoise));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .post-card-link:hover::before {
+            transform: scaleX(1);
+        }
+
+        .post-card-link::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1), transparent);
+            border-radius: 50%;
+            transform: scale(0);
+            transition: transform 0.4s ease;
+        }
+
+        .post-card-link:hover::after {
+            transform: scale(3);
+        }
+
+        .post-card-link:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 
+                0 20px 40px rgba(212, 175, 55, 0.15),
+                0 0 0 1px rgba(212, 175, 55, 0.1);
+        }
+
+        .post-card-link img {
+            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .post-card-link:hover img {
+            transform: scale(1.1) rotate(1deg);
+            filter: brightness(1.05) contrast(1.05);
+        }
+
+        /* Категории с казахским акцентом */
+        .post-card-link p:first-child {
+            background: linear-gradient(135deg, var(--kazakh-gold), var(--kazakh-gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Заголовки */
+        h1, h2, h3 {
+            background: linear-gradient(135deg, #2d2d2d 0%, var(--kazakh-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleFadeIn 0.8s ease-out;
+        }
+
+        @keyframes titleFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+                filter: blur(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+        }
+
+        /* Контент поста */
         .post-content p {
             margin-bottom: 1.25rem;
-            line-height: 1.7;
+            line-height: 1.8;
+            animation: contentFadeIn 0.6s ease-out backwards;
         }
+
+        .post-content p:nth-child(1) { animation-delay: 0.1s; }
+        .post-content p:nth-child(2) { animation-delay: 0.2s; }
+        .post-content p:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes contentFadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
         .post-content h2 {
             font-size: 1.5rem;
             font-weight: 600;
             margin-top: 2rem;
             margin-bottom: 1rem;
+            padding-left: 20px;
+            border-left: 4px solid var(--kazakh-gold);
+            background: linear-gradient(135deg, var(--kazakh-gold), var(--kazakh-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: subtitleSlide 0.5s ease-out;
         }
+
+        @keyframes subtitleSlide {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
         .line-clamp-2 {
            overflow: hidden;
            display: -webkit-box;
            -webkit-box-orient: vertical;
            -webkit-line-clamp: 2;
         }
+
+        /* Кнопки с казахским дизайном */
+        button, .btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3), transparent);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Формы с казахским акцентом */
+        input, textarea, select {
+            transition: all 0.3s ease;
+            border: 2px solid rgba(212, 175, 55, 0.2);
+        }
+
+        input:focus, textarea:focus, select:focus {
+            border-color: var(--kazakh-gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1), 0 10px 25px rgba(212, 175, 55, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Модальные окна */
+        .modal {
+            backdrop-filter: blur(10px);
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Футер */
+        footer {
+            background: linear-gradient(135deg, #ffffff 0%, var(--kazakh-white) 100%);
+            border-top: 2px solid transparent;
+            border-image: linear-gradient(90deg, transparent, var(--kazakh-gold), transparent) 1;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                var(--kazakh-gold) 25%, 
+                var(--kazakh-blue) 50%, 
+                var(--kazakh-gold) 75%, 
+                transparent);
+        }
+
+        /* Социальные иконки */
+        footer a img {
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            filter: grayscale(50%);
+        }
+
+        footer a:hover img {
+            filter: grayscale(0%) drop-shadow(0 5px 15px rgba(212, 175, 55, 0.4));
+            transform: translateY(-5px) rotate(5deg) scale(1.2);
+        }
+
+        /* Анимация при скролле */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Кастомный скроллбар */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--kazakh-beige);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--kazakh-gold), var(--kazakh-blue));
+            border-radius: 6px;
+            border: 2px solid var(--kazakh-beige);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, var(--kazakh-gold-light), var(--kazakh-blue-light));
+        }
+
+        /* Мобильное меню */
+        #mobile-menu {
+            animation: slideDown 0.3s ease-out;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(253, 251, 247, 0.98));
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Декоративные элементы для админ панели */
+        #admin-page .bg-white {
+            background: linear-gradient(135deg, #ffffff 0%, var(--kazakh-white) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        #admin-page .bg-white:hover {
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
+            transform: translateY(-2px);
+        }
+
+        /* Кнопка назад */
+        #back-to-grid-btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(30, 123, 143, 0.1));
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+        }
+
+        #back-to-grid-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 8px;
+            padding: 2px;
+            background: linear-gradient(135deg, var(--kazakh-gold), var(--kazakh-blue));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        #back-to-grid-btn:hover::before {
+            opacity: 1;
+        }
+        .login-popup {
+        position: fixed;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 400px;
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+        }
+
+        @media (max-width: 600px) {
+        .login-popup {
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+    }
     </style>
 </head>
 <body class="antialiased">
+    <!-- Плавающие узоры -->
+    <div class="floating-pattern"></div>
+    <div class="floating-pattern"></div>
+    <div class="floating-pattern"></div>
 
     <!-- Header -->
     <header class="bg-white/90 backdrop-blur-lg sticky top-0 z-40 border-b border-gray-200/80">
@@ -197,7 +710,7 @@
     </footer>
 
     <!-- Admin Login Modal -->
-    <div id="login-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center hidden z-50 p-5">
+    <div id="login-modal" class="modal fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center hidden z-50 p-5">
         <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-sm relative">
              <button id="close-login-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl">&times;</button>
              <h2 class="text-2xl font-bold mb-6 text-center">Вход для администратора</h2>
@@ -211,7 +724,7 @@
     </div>
     
     <!-- Edit Post Modal -->
-    <div id="edit-post-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center hidden z-50 p-5">
+    <div id="edit-post-modal" class="modal fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center hidden z-50 p-5">
         <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-2xl relative flex flex-col" style="max-height: 90vh;">
              <div class="flex-shrink-0">
                 <button id="close-edit-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl">&times;</button>
@@ -489,4 +1002,3 @@
     </script>
 </body>
 </html>
-
